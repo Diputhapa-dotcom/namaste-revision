@@ -18,10 +18,15 @@ exports.forgotpasswordPost = async(req,res)=>{
 
         }
     })
-    data[0].verifyTime = Date.now();
-    await data[0].save();
+    if(data.length>0){
 
+        data[0].verifyTime = Date.now();
+        await data[0].save();
+        
         sendMsg(email);
         res.redirect("/otpverification?email=" + email);
+    }else{
+        res.redirect("/register")
+    }
     
 }

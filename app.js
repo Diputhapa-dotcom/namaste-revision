@@ -23,19 +23,18 @@ app.use(session({
     saveUninitialized:false
 }));
 app.use(flash());
-app.use(cookieParser);  
+app.use(cookieParser());  
 
 
 
 app.get("/register",registerGet);
 app.post("/register",registerPost);
-app.get("/login",authentication,loginGet);
+app.get("/login",loginGet);
 app.post("/login",loginPost);
 app.get("/forgotpassword",forgotpasswordGet);
 app.post("/forgotpassword",forgotpasswordPost);
 app.get("/otpverification",otpGet);
 app.post("/otpverification/:email",otpPost);
-
 
 
 

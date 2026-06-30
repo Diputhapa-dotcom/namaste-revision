@@ -8,7 +8,8 @@ const {email} = req.query;
     res.render("otpVerification.ejs",{error:error,email:email})
 }
 exports.otpPost =async (req,res)=>{
-    console.log(req.params)
+    const email =  req.params.email;
+    console.log(email)
     const {otp} = req.body;
     console.log(otp)
     if(!otp){
@@ -17,6 +18,7 @@ exports.otpPost =async (req,res)=>{
     }
    const otpCheck = await registers.findAll({
         where:{
+            email:email,
             otp:otp
         }
     });
