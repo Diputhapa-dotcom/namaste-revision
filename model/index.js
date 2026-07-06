@@ -32,11 +32,18 @@ db.sequelize = sequelize;
 
 
 //importing model file
- db.registers = require("./registerModel")(sequelize,DataTypes)
+ db.logins = require("./loginModel")(sequelize,DataTypes);
+ db.comments = require("./commentModel")(sequelize,DataTypes);
 
 
 
-db.sequelize.sync({ force: false}).then(() => {
+ //relationship
+
+ db.logins.hasMany(db.comments);
+ db.comments.belongsTo(db.logins);
+
+
+db.sequelize.sync({ force:false}).then(() => {
   console.log("yes re-sync done");
 });
 
