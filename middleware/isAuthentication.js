@@ -14,6 +14,7 @@ if(!token || token==null ||token==undefined){
 }
 const verify = await promisify(jwt.verify)(token,"password");
 req.userid = verify.id;
-next()
+next();
+
 
 }

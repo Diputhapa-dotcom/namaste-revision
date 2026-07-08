@@ -23,8 +23,8 @@ app.use(cookieParser())
 
 app.get("/login",loginGet);
 app.post("/login",loginPost);
-app.get("/comment",commentGet);
-app.post("/comment",isAuthentication,commentPost);
+app.get("/comment",isAuthentication,commentGet);
+app.post("/comment",commentPost);
 
 
 

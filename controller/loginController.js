@@ -1,4 +1,4 @@
-const { where } = require("sequelize");
+const { where, Model } = require("sequelize");
 const { logins, comments } = require("../model");
 const jwt = require("jsonwebtoken");
 
@@ -7,10 +7,8 @@ const jwt = require("jsonwebtoken");
 
 
 
-exports.loginGet = (req,res)=>{
-    logins.findAll({
-        
-    })
+exports.loginGet = async(req,res)=>{
+
     res.render("login.ejs")
 }
 
