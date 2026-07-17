@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
-    const Login = sequelize.define("login", {
+    const Register = sequelize.define("register", {
+        username:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
       email: {
         type: DataTypes.STRING,
         allowNull : false
@@ -9,5 +13,5 @@ module.exports = (sequelize, DataTypes) => {
         allowNull:false
       }
     });
-    return Login;
+    return Register;
   };
