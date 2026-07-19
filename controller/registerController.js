@@ -2,28 +2,23 @@ const { registers } = require("../model");
 const bcrypt = require("bcrypt");
 
 
-exports.registerGet = (req,res)=>{
-    const error= req.flash("error")
-    res.render("register.ejs",{error});
-}
 exports.registerPost = async (req,res)=>{
-    const{username,email,password,confirmPassword}= req.body;
-    if(!username || !email || !password ||!confirmPassword){
-      req.flash("error","Please fill the given requirement");
-     return res.redirect("/register");
+    const{username,email,password}= req.body;
+    if(!username || !email || !password ){
+    res.json({
+      message:"Please enter the given input"
+    })
     }
-    if(password!==confirmPassword){
-         req.flash("error","Password must be same");
-     return res.redirect("/register");
-    }
+  
     const data = await registers.findAll({
         where:{
             email:email,
         }
     })
   if(data.length>0){
-      req.flash("error","Email is already registered");
-     return res.redirect("/register");
+    return res.json({
+      message:"Already registered"
+     })
   }
   await registers.create({
     username:username,
@@ -32,6 +27,6 @@ exports.registerPost = async (req,res)=>{
   })
   res.json({
     message:"registered successfully",
-    status:201
+    status:200
   })
 }

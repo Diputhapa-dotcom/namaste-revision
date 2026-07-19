@@ -1,14 +1,21 @@
 const express = require("express");
-const { registerGet, registerPost } = require("./controller/registerController");
+const { registerPost } = require("./controller/registerController");
+const cors = require("cors")
 const app = express();
 const session = require("express-session");
 const flash = require("express-flash");
-const { loginGet, loginPost } = require("./controller/loginController");
+const { loginPost } = require("./controller/loginController");
 const { blogPost } = require("./controller/blogController");
 const { isAuthenticate } = require("./middleware/isAuthenticate");
 const multer = require("multer");
 const { storage } = require("./middleware/file");
 
+
+
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 app.use(express.static("./public"))
 require("./model");
 app.use(express.json());
@@ -26,22 +33,9 @@ const file = multer({storage:storage});
 
 
 
-app.get("/register",registerGet);
 app.post("/register",registerPost);
-app.get("/login",loginGet);
 app.post("/login",loginPost);
-app.post("/blog/add",isAuthenticate,file.single("file"),blogPost);
-
-
-
-
-
-
-
-
-
-
-
+app.post("/blog ",isAuthenticate,file.single("file"),blogPost);
 
 
 
