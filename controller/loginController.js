@@ -24,7 +24,7 @@ exports.loginPost = async (req,res)=>{
  }
  const isPassword = bcrypt.compareSync(password,data[0].password);
  if(!isPassword){
-    res.json({
+   return res.json({
         message:"invalid password"
     })
  }
@@ -33,7 +33,6 @@ res.json({
     message:"loggedin Successfully",
     token:token
 })
-
 }
 
 
